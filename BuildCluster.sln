@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BuildCluster", "BuildCluster\BuildCluster.fsproj", "{14F1996E-5555-4390-8B88-BF3841B8A36B}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BuildCluster.Tests", "BuildCluster.Tests\BuildCluster.Tests.fsproj", "{A39FD810-B466-459E-8F6F-CC418FD0C8ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14F1996E-5555-4390-8B88-BF3841B8A36B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14F1996E-5555-4390-8B88-BF3841B8A36B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14F1996E-5555-4390-8B88-BF3841B8A36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14F1996E-5555-4390-8B88-BF3841B8A36B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A39FD810-B466-459E-8F6F-CC418FD0C8ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39FD810-B466-459E-8F6F-CC418FD0C8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39FD810-B466-459E-8F6F-CC418FD0C8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39FD810-B466-459E-8F6F-CC418FD0C8ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
