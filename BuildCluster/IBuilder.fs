@@ -7,6 +7,7 @@ open System.Linq
 open Microsoft.CodeAnalysis.Emit
 open Microsoft.CodeAnalysis
 open System.Collections.Immutable
+open System
 
 type BuildResult = Success | Error of string[]
 
@@ -15,6 +16,8 @@ type IBuilder =
 
 type Builder() = 
     
+    let DefaultAssemblies = [|typeof<Object>.Assembly|]
+
     let ReturnError(errors: ImmutableArray<Diagnostic>) : BuildResult  = 
         match errors.Any() with
             | false -> Error [|"unknown error"|]
@@ -32,7 +35,11 @@ type Builder() =
 
     let Compile(text:string):BuildResult = 
         let syntaxTree = CSharpSyntaxTree.ParseText text;
-        let compilation = CSharpCompilation.Create (Path.GetRandomFileName(), [|syntaxTree|])
+        let assemblies = DefaultAssemblies
+                                .Select(fun a -> a.Location)
+                                .Select(fun a-> MetadataReference.CreateFromFile a)
+                                .Cast<MetadataReference>()
+        let compilation = CSharpCompilation.Create (Path.GetRandomFileName(), [|syntaxTree|], assemblies)
         use stream = new MemoryStream()
         let emitResult = compilation.Emit stream
         ProcessResult emitResult
