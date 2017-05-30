@@ -39,7 +39,7 @@ type Builder() =
                                 .Select(fun a -> a.Location)
                                 .Select(fun a-> MetadataReference.CreateFromFile a)
                                 .Cast<MetadataReference>()
-        let compilation = CSharpCompilation.Create (Path.GetRandomFileName(), [|syntaxTree|], assemblies)
+        let compilation = CSharpCompilation.Create (Path.GetRandomFileName(), [|syntaxTree|], assemblies, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
         use stream = new MemoryStream()
         let emitResult = compilation.Emit stream
         ProcessResult emitResult

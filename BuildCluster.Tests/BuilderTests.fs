@@ -3,22 +3,19 @@
 module BuilderTests =
     open NUnit.Framework
     open BuildCluster
+    open FsUnit
 
     [<Test>]
     let ``Build When Null Input Then Error``() = 
-        let builder = new Builder() :> IBuilder
+        let sut = new Builder() :> IBuilder
 
-        let sut = builder.Build null
-
-        Assert.AreEqual((Error [|"can't compile nothing"|]), sut);
+        sut.Build null |> should equal (Error [|"can't compile nothing"|]);
 
     [<Test>]
     let ``Build When Empty Input Then Error``() = 
-        let builder = new Builder() :> IBuilder      
+        let sut = new Builder() :> IBuilder      
         
-        let sut = builder.Build System.String.Empty
-
-        Assert.AreEqual((Error [|"can't compile nothing"|]), sut);
+        sut.Build null |> should equal (Error [|"can't compile nothing"|]);
     
     [<Test>]
     let ``Build When Do Nothing Valid C# Program Then Success Result``() = 
@@ -27,17 +24,15 @@ module BuilderTests =
                                     {
                                         public class DoNothing
                                         {
-                                            public void Do()
+                                            public static void Do()
                                             {
                                             }
                                         }
                                     }"
         
-        let builder = new Builder() :> IBuilder      
+        let sut = new Builder() :> IBuilder      
         
-        let sut = builder.Build doNothingProgram
-
-        Assert.AreEqual(Success, sut)
+        sut.Build doNothingProgram |> should equal Success
 
     [<Test>]
     let ``Build When Do Nothing InValid C# Program Then Error``() = 
@@ -52,14 +47,8 @@ module BuilderTests =
                                         }
                                     }"
         
-        let builder = new Builder() :> IBuilder      
+        let sut = new Builder() :> IBuilder      
         
-        let sut = builder.Build doNothingProgram
-
-        Assert.AreEqual(Error [|"can't compile nothing"|], sut)
-
-
-    
-
+        sut.Build doNothingProgram |> should contain "The type or namespace name 'cl' could not be found (are you missing a using directive or an assembly reference?)"
 
 
